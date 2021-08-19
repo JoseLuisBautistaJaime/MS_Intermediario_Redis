@@ -1,6 +1,7 @@
-package mx.com.nmp.msIntermediarioRedis;
+package mx.com.nmp.partidas;
+import org.junit.Assert;
+import org.junit.Test;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -8,6 +9,7 @@ class MsIntermediarioRedisApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
