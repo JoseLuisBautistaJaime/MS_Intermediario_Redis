@@ -1,4 +1,4 @@
-package mx.com.nmp.partidas.entitys;
+package mx.com.nmp.partidas.model;
 import lombok.Getter;
 import lombok.Setter;
 

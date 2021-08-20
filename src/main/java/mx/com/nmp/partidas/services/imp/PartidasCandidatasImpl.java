@@ -3,7 +3,7 @@ package mx.com.nmp.partidas.services.imp;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 
-import mx.com.nmp.partidas.entitys.ControlExcepcion;
+import mx.com.nmp.partidas.model.ControlExcepcion;
 import mx.com.nmp.partidas.model.AlmacenarPartidaCandidatasRequest;
 import mx.com.nmp.partidas.model.AlmacenarPartidaCandidatasResponse;
 import mx.com.nmp.partidas.model.RecuperarPartidasCandidatasRequest;

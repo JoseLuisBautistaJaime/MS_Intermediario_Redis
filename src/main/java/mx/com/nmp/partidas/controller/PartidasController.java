@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import mx.com.nmp.partidas.api.PartidasApi;
 import mx.com.nmp.partidas.exception.InvalidHeaderException;
 import mx.com.nmp.partidas.model.AlmacenarPartidaCandidatasRequest;
@@ -39,7 +41,7 @@ public class PartidasController implements PartidasApi{
   private IPartidasCandidatas partidaCandidatas;
   
     @PostMapping(path = "/infoprenda", consumes = APPLICATIONJSON, produces = APPLICATIONJSON)
-    public @ResponseBody ResponseEntity<Object>  postPartidasCandidatas( @RequestBody AlmacenarPartidaCandidatasRequest almacenarPartidaRequest,HttpServletRequest headers){
+    public @ResponseBody ResponseEntity<Object>  postPartidasCandidatas(@Valid @RequestBody AlmacenarPartidaCandidatasRequest almacenarPartidaRequest,HttpServletRequest headers){
         log.info("postPartidasCandidatas");
       
         AlmacenarPartidaCandidatasResponse response=  partidaCandidatas.almacenarPartida(almacenarPartidaRequest, headers);	

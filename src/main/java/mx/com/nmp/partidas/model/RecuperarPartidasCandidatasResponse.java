@@ -1,8 +1,5 @@
 package mx.com.nmp.partidas.model;
-
 import java.util.ArrayList;
-
-import mx.com.nmp.partidas.entitys.ControlExcepcion;
 import mx.com.nmp.partidas.entitys.Prendas;
 import lombok.Getter;
 import lombok.Setter;
