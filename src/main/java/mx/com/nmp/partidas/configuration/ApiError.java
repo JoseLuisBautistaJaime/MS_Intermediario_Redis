@@ -17,7 +17,7 @@ public class ApiError {
 		this.message = message;
     }
     public ApiError methodNotAllowed() {
-        this.code = "NMP-API-REDIS-403";
+        this.code = "NMP-API-REDIS-405";
 		this.message = "Metodo no soportado";
 		return this;
     }

@@ -2,6 +2,8 @@ package mx.com.nmp.partidas.services.imp;
 
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
+
+import mx.com.nmp.partidas.entitys.ControlExcepcion;
 import mx.com.nmp.partidas.model.AlmacenarPartidaCandidatasRequest;
 import mx.com.nmp.partidas.model.AlmacenarPartidaCandidatasResponse;
 import mx.com.nmp.partidas.model.RecuperarPartidasCandidatasRequest;
@@ -21,6 +23,10 @@ public class PartidasCandidatasImpl implements IPartidasCandidatas{
 
     public  RecuperarPartidasCandidatasResponse recuperarPartidas(RecuperarPartidasCandidatasRequest recuperarPartidasRequest, HttpServletRequest headers){
         RecuperarPartidasCandidatasResponse response= new RecuperarPartidasCandidatasResponse();
+        ControlExcepcion controlExcepcion= new ControlExcepcion();
+        controlExcepcion.setCodigo("200");
+        controlExcepcion.setMensaje("Resultado Exitoso");
+        response.setControlExcepcion(controlExcepcion);
         return response; 
     } 
 

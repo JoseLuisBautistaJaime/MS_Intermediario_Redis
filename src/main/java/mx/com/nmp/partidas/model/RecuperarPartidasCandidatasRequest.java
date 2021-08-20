@@ -1,4 +1,9 @@
 package mx.com.nmp.partidas.model;
-public class RecuperarPartidasCandidatasRequest {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class RecuperarPartidasCandidatasRequest {
+ String id;
 }
