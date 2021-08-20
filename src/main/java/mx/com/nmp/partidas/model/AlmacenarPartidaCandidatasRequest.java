@@ -1,7 +1,7 @@
 package mx.com.nmp.partidas.model;
 
-import mx.com.nmp.partidas.entitys.Partidas;
+import mx.com.nmp.partidas.entitys.Partida;
 
-public class AlmacenarPartidaCandidatasRequest extends Partidas{
+public class AlmacenarPartidaCandidatasRequest extends Partida{
 
 }

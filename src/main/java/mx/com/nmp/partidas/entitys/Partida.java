@@ -2,12 +2,18 @@ package mx.com.nmp.partidas.entitys;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Partidas implements Serializable {
+@RedisHash("partida")
+public class Partida implements Serializable {
+    @NotNull(message="Se debe incluir el campo id")
+    private @Id String id;
     @NotNull(message="Se debe incluir el campo idCliente")
     private String idCliente;
     @NotNull(message="Se debe incluir el campo nivelCliente")
@@ -22,9 +28,7 @@ public class Partidas implements Serializable {
     private String rango;
     @NotNull(message="Se debe incluir el campo kilataje")
     private Number kilataje;
-    @NotNull(message="Se debe incluir el campo incremento")
     private Number incremento;
-    @NotNull(message="Se debe incluir el campo desplazamiento")
     private String desplazamiento;
     @NotNull(message="Se debe incluir el campo ramo")
     private String ramo;

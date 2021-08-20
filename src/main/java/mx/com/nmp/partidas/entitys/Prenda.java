@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Prendas implements Serializable {
+public class Prenda implements Serializable {
     private String tipo;
     private String lote;
     private String idPrenda;
