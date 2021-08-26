@@ -22,11 +22,10 @@ const savePartida = async (req, res) => {
       LOG.debugJSON('Mensage: {} en el canal {} - {}', message, canal, reply)
       LOG.info('CTRL: Ending savePartida  method')
       return Response.Ok(res)
-
     })
   } catch (err) {
     LOG.error(err)
-    return handlerError(res, err)    
+    return handlerError(res, err)
   }
 }
 
@@ -64,7 +63,7 @@ const getPartidas = async (req, res) => {
     })
   } catch (err) {
     LOG.error(err)
-    return handlerError(res, err) 
+    return handlerError(res, err)
   }
 }
 export const PartidasController = {

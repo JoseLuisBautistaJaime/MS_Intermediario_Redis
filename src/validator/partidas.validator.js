@@ -49,10 +49,9 @@ const partidaInfoprenda = {
     subramo: {
       type: 'string',
       required: true
-    }    
+    }
   }
 }
-
 
 ValidatorSchema.addSchema(partidaInfoprenda, '/partidaInfoprenda')
 

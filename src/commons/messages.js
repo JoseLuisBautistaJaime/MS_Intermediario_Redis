@@ -9,7 +9,7 @@ export const MESSAGES = {
   },
   'NMP-API-REDIS-400': {
     template: 'La solicitud no se encuentra bien formada'
-  },  
+  },
   'NMP-API-REDIS-401': {
     template: 'Se ha producido un error de autorización'
   },

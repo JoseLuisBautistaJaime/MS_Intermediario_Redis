@@ -1,11 +1,11 @@
-import { CODE_SUCCESS, CODE_INTERNAL_SERVER_ERROR} from '../constansts'
+import { CODE_SUCCESS } from '../constansts'
 import { MESSAGES } from './messages'
 
 const createResponse = (res, statusCode, data = {}, code = '') => {
   if (code !== '') {
     const { template: status, description: message } = MESSAGES[code]
-    return res.status(statusCode).send({...data, code, status, message })
-  } 
+    return res.status(statusCode).send({ ...data, code, status, message })
+  }
 }
 
 const Ok = (res, data) => {
