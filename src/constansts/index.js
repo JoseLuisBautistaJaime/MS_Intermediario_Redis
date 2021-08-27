@@ -17,7 +17,8 @@ export const CODE_NOT_FOUND = 'NMP-API-REDIS-404'
 export const CODE_INTERNAL_SERVER_ERROR = 'NMP-API-REDIS-500'
 // Messages
 export const MESSAGE_SUCCESS = 'Se ha realizado correctamente la operación'
-
+export const MESSAGE_EXITOSO = 'Resultado Exitoso'
+export const MESSAGE_SIN_RESULTADOS =
+  'No se encontraron prendas recuperadas candidatas a beneficio Infoprenda'
 export const { LOG_LEVEL } = process.env
-
 export const { URL_OAUTH_VALIDATOR } = process.env

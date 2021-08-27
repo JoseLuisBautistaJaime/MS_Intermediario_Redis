@@ -20,7 +20,12 @@ module.exports = (res, e) => {
     message = e.message
     LOG.debug(`StatusCode: ${statusCode}`)
     LOG.error(`message: ${message}`)
-    return Response.createResponse(res, statusCode, '',CODE_INTERNAL_SERVER_ERROR)
+    return Response.createResponse(
+      res,
+      statusCode,
+      '',
+      CODE_INTERNAL_SERVER_ERROR
+    )
   }
 
   if (e instanceof BadRequestException) statusCode = 400
