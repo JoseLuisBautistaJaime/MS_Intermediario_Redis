@@ -64,7 +64,7 @@ const getPartidas = async (req, res) => {
     }
 
     client.get(req.query.id, async (err, partidas) => {
-      let listaPrendasAsociadas = []
+      const listaPrendasAsociadas = []
       let controlExcepcion = {}
       if (err) {
         LOG.error(err)
