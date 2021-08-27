@@ -38,28 +38,24 @@ app.use(cors(corsOptionsDelegate))
 
 app.use(`/${CONTEXT_NAME}/${CONTEXT_VERSION}`, appRoutes)
 
-app.use((req, res, next)=>{
-  const error= new Error('Not found');
-  error.status=404;
-  next(error);
+app.use((req, res, next) => {
+  const error = new Error('Not found')
+  error.status = 404
+  next(error)
 })
 
-app.use((error,req, res, next)=>{ 
-  res.status(error.status || 500);
-  if(error.status===400){
-    res.json(Response.BadRequest(res));    
-  } 
-  else if(error.status===401){
-    res.json(Response.Unauthorized(res));    
+app.use((error, req, res, next) => {
+  res.status(error.status || 500)
+  if (error.status === 400) {
+    res.json(Response.BadRequest(res))
+  } else if (error.status === 401) {
+    res.json(Response.Unauthorized(res))
+  } else if (error.status === 404) {
+    res.json(Response.NotFound(res))
+  } else {
+    res.json(Response.InernalError(res))
   }
-  else if(error.status===404){
-    res.json(Response.NotFound(res));    
-  }
-  else{
-    res.json(Response.InernalError(res));    
-  }
-});
-
+})
 
 app.listen(PORT, appEnv.bind, () =>
   LOG.info(`server running on ${appEnv.url}/${CONTEXT_NAME}/${CONTEXT_VERSION}`)

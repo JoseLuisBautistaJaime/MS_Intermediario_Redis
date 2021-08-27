@@ -1,4 +1,10 @@
-import { CODE_SUCCESS, CODE_UNAUTHORIZED, CODE_NOT_FOUND, CODE_BAD_REQUEST, CODE_INTERNAL_SERVER_ERROR} from '../constansts'
+import {
+  CODE_SUCCESS,
+  CODE_UNAUTHORIZED,
+  CODE_NOT_FOUND,
+  CODE_BAD_REQUEST,
+  CODE_INTERNAL_SERVER_ERROR
+} from '../constansts'
 import { MESSAGES } from './messages'
 
 const createResponse = (res, statusCode, data = {}, code = '') => {
@@ -28,7 +34,8 @@ const NotFound = (res, data) => {
 
 const InernalError = (res, data) => {
   const statusCode = 500
-  return createResponse(res, statusCode, '', CODE_INTERNAL_SERVER_ERROR)
+
+  return createResponse(res, statusCode, data, CODE_INTERNAL_SERVER_ERROR)
 }
 export const Response = {
   Ok,
