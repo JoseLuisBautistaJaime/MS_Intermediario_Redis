@@ -17,7 +17,7 @@ export const MESSAGES = {
     template: 'Se ha producido un error de autorización'
   },
   'NMP-API-REDIS-500': {
-    template: 'UNSUCCESS',
+    template: 'ERROR',
     description: 'Error interno del servidor.'
   }
 }

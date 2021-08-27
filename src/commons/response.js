@@ -1,4 +1,4 @@
-import { CODE_SUCCESS } from '../constansts'
+import { CODE_SUCCESS, CODE_UNAUTHORIZED } from '../constansts'
 import { MESSAGES } from './messages'
 
 const createResponse = (res, statusCode, data = {}, code = '') => {
@@ -13,8 +13,15 @@ const Ok = (res, data) => {
   return createResponse(res, statusCode, data, CODE_SUCCESS)
 }
 
+const Unauthorized = (res, data) => {
+  const statusCode = 401
+  return createResponse(res, statusCode, data, CODE_UNAUTHORIZED)
+}
+
 export const Response = {
-  Ok
+  Ok,
+  Unauthorized,
+  createResponse
 }
 
 export default null

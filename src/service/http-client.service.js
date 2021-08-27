@@ -62,12 +62,8 @@ const sendRequest = async ({
     )
 
     LOG.debugJSON('response', responseBody)
-
-    if (!ok) {
-      throw new CommonException(
-        createMessageError(null, null, status, responseBody)
-      )
-    }
+    LOG.debugJSON('valido', ok)
+    LOG.debugJSON('status', status)
     LOG.debug('SERVICE: Ending sendRequest method')
     return responseBody
   } catch (err) {

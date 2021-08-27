@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import LOG from '../commons/logger'
 import { Response } from '../commons/response'
+import { CODE_INTERNAL_SERVER_ERROR } from '../constansts'
 import {
   BadRequestException,
   ConflictException,
@@ -18,8 +19,8 @@ module.exports = (res, e) => {
   if (e instanceof CommonException) {
     message = e.message
     LOG.debug(`StatusCode: ${statusCode}`)
-    LOG.debug(`message: ${message}`)
-    return Response.createResponse(res, statusCode, message)
+    LOG.error(`message: ${message}`)
+    return Response.createResponse(res, statusCode, '',CODE_INTERNAL_SERVER_ERROR)
   }
 
   if (e instanceof BadRequestException) statusCode = 400
