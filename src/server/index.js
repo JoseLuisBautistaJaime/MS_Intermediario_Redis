@@ -52,6 +52,8 @@ app.use((error, req, res, next) => {
     res.json(Response.Unauthorized(res))
   } else if (error.status === 404) {
     res.json(Response.NotFound(res))
+  } else if (error.status === 502) {
+    res.json(Response.InernalBadGetaway(res))
   } else {
     res.json(Response.InernalError(res))
   }

@@ -3,13 +3,12 @@ import {
   CODE_UNAUTHORIZED,
   CODE_NOT_FOUND,
   CODE_BAD_REQUEST,
-  CODE_INTERNAL_SERVER_ERROR
+  CODE_INTERNAL_SERVER_ERROR,
+  CODE_INTERNAL_BAD_GETAWAY
 } from '../constansts'
-import { MESSAGES } from './messages'
 
 const createResponse = (res, statusCode, data = {}, code = '') => {
-  const { template: status, description: message } = MESSAGES[code]
-  return res.status(statusCode).send({ ...data, code, status, message })
+  return res.status(statusCode).send({ ...data, code })
 }
 
 const Ok = (res, data) => {
@@ -34,15 +33,21 @@ const NotFound = (res, data) => {
 
 const InernalError = (res, data) => {
   const statusCode = 500
-
   return createResponse(res, statusCode, data, CODE_INTERNAL_SERVER_ERROR)
 }
+
+const InernalBadGetaway = (res, data) => {
+  const statusCode = 502
+  return createResponse(res, statusCode, data, CODE_INTERNAL_BAD_GETAWAY)
+}
+
 export const Response = {
   Ok,
   BadRequest,
   Unauthorized,
   NotFound,
   InernalError,
+  InernalBadGetaway,
   createResponse
 }
 

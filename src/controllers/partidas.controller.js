@@ -2,6 +2,8 @@ import LOG from '../commons/logger'
 import { Response } from '../commons/response'
 import client from '../service/partidas.service'
 import handlerError from '../validator/handler-error'
+import { PartidasValidator } from '../validator/partidas.validator'
+import { handlerErrorValidation } from '../validator/message.mapping'
 import {
   URL_OAUTH_VALIDATOR,
   MESSAGE_EXITOSO,
@@ -32,12 +34,20 @@ const healthCheck = async (req, res) => {
 const savePartida = async (req, res) => {
   LOG.info('CTRL: Starting savePartida method')
   try {
+    
     const valido = await validarToken(req)
     if (!valido) {
       return Response.Unauthorized(res)
     }
-    const canal = req.header('Canal') || 'FMP'
+
     const data = req.body
+    const validator = PartidasValidator.ValidatorSchema.validate(
+      data,
+      PartidasValidator.partidaInfoprendaRequest
+    )
+    if (validator.errors.length) handlerErrorValidation(validator)
+    const canal = req.header('Canal') || 'FMP'
+   
     LOG.debugJSON('Request', data)
     const message = JSON.stringify(data)
     client.publish(canal, message, function onError(err, reply) {

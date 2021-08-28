@@ -8,7 +8,8 @@ export const MESSAGES = {
     description: 'Se ha realizado correctamente la operación'
   },
   'NMP-API-REDIS-400': {
-    template: 'La solicitud no se encuentra bien formada'
+    template: '<%= message %>',
+    description: 'BAD REQUEST'
   },
   'NMP-API-REDIS-401': {
     template: 'Se ha producido un error de autorización'
@@ -17,12 +18,17 @@ export const MESSAGES = {
     template: 'Se ha producido un error de autorización'
   },
   'NMP-API-REDIS-404': {
-    template: 'El recurso no existe'
+    template: 'El recurso no existe',
+    description: 'Error interno del servidor.'
   },
   'NMP-API-REDIS-500': {
-    template: 'ERROR',
+    template: '<%= text %>',
     description: 'Error interno del servidor.'
-  }
+  },
+  'NMP-API-REDIS-502': {
+    template: 'Bad Getaway',
+    description: 'Error interno del servidor.'
+  },
 }
 
 export default null

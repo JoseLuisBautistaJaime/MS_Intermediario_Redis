@@ -2,8 +2,8 @@ import { Validator } from 'jsonschema'
 
 const ValidatorSchema = new Validator()
 
-const partidaInfoprenda = {
-  id: '/partidaInfoprenda',
+const partidaInfoprendaRequest = {
+  id: '/partidaInfoprendaRequest',
   type: 'object',
   properties: {
     idCliente: {
@@ -53,11 +53,11 @@ const partidaInfoprenda = {
   }
 }
 
-ValidatorSchema.addSchema(partidaInfoprenda, '/partidaInfoprenda')
+ValidatorSchema.addSchema(partidaInfoprendaRequest, '/partidaInfoprendaRequest')
 
-export const ProductValidator = {
+export const PartidasValidator = {
   ValidatorSchema,
-  partidaInfoprenda
+  partidaInfoprendaRequest
 }
 
 export default null

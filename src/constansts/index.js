@@ -15,6 +15,7 @@ export const CODE_UNAUTHORIZED = 'NMP-API-REDIS-401'
 export const CODE_FORBIDDEN = 'NMP-API-REDIS-403'
 export const CODE_NOT_FOUND = 'NMP-API-REDIS-404'
 export const CODE_INTERNAL_SERVER_ERROR = 'NMP-API-REDIS-500'
+export const CODE_INTERNAL_BAD_GETAWAY = 'NMP-API-REDIS-502'
 // Messages
 export const MESSAGE_SUCCESS = 'Se ha realizado correctamente la operación'
 export const MESSAGE_EXITOSO = 'Resultado Exitoso'
