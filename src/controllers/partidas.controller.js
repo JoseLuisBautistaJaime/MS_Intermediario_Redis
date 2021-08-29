@@ -34,7 +34,6 @@ const healthCheck = async (req, res) => {
 const savePartida = async (req, res) => {
   LOG.info('CTRL: Starting savePartida method')
   try {
-    
     const valido = await validarToken(req)
     if (!valido) {
       return Response.Unauthorized(res)
@@ -47,7 +46,7 @@ const savePartida = async (req, res) => {
     )
     if (validator.errors.length) handlerErrorValidation(validator)
     const canal = req.header('Canal') || 'FMP'
-   
+
     LOG.debugJSON('Request', data)
     const message = JSON.stringify(data)
     client.publish(canal, message, function onError(err, reply) {

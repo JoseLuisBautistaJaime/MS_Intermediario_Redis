@@ -39,7 +39,7 @@ export const handlerErrorValidation = validationErrors => {
   if (!validationErrors.errors.length) return
 
   const message = getMessages(validationErrors.errors)
-  LOG.debug("Valor mensaje:",message)
+  LOG.debug('Valor mensaje:', message)
   throw new BadRequestException(
     createMessageError('NMP-API-REDIS-400', { message })
   )

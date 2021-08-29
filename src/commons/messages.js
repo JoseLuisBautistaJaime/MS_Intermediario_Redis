@@ -28,7 +28,7 @@ export const MESSAGES = {
   'NMP-API-REDIS-502': {
     template: 'Bad Getaway',
     description: 'Error interno del servidor.'
-  },
+  }
 }
 
 export default null

@@ -14,9 +14,11 @@ module.exports = (res, e) => {
   LOG.error(`error: ${JSON.stringify(e)}`)
 
   let statusCode = 500
-  let message ='Error'
+  let message
   if (e instanceof CommonException) {
     message = e.message
+    LOG.debug(`StatusCode: ${statusCode}`)
+    LOG.error(`message: ${message}`)
     return Response.createResponse(
       res,
       statusCode,
@@ -32,18 +34,21 @@ module.exports = (res, e) => {
   const { code, mergeVariables } = e
   const { template, description } = MESSAGES[code]
   const compiled = _.template(template)
-  
+
   LOG.debug(`mergeVariables: ${mergeVariables}`)
   message = compiled(mergeVariables)
   LOG.debug(`message: ${message}`)
   LOG.debug(`description: ${description}`)
   LOG.debug('Ending handlerError...')
 
-  return Response.createResponse(res, statusCode, {
-    code,
-    message,
-    description
-  },
-  code
+  return Response.createResponse(
+    res,
+    statusCode,
+    {
+      code,
+      message,
+      description
+    },
+    code
   )
 }

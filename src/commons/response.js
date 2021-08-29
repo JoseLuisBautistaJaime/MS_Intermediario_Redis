@@ -43,7 +43,12 @@ const NotFound = (res, data) => {
 
 const InernalError = (res, data) => {
   const statusCode = 500
-  return createResponseForCode(res, statusCode, data, CODE_INTERNAL_SERVER_ERROR)
+  return createResponseForCode(
+    res,
+    statusCode,
+    data,
+    CODE_INTERNAL_SERVER_ERROR
+  )
 }
 
 const InernalBadGetaway = (res, data) => {
