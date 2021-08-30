@@ -19,7 +19,7 @@ export const MESSAGES = {
   },
   'NMP-API-REDIS-404': {
     template: 'El recurso no existe',
-    description: 'Error interno del servidor.'
+    description: 'No se encontraron resultados.'
   },
   'NMP-API-REDIS-500': {
     template: '<%= text %>',
