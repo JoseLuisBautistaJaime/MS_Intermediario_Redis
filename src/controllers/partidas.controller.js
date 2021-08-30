@@ -7,7 +7,9 @@ import { handlerErrorValidation } from '../validator/message.mapping'
 import {
   URL_OAUTH_VALIDATOR,
   MESSAGE_EXITOSO,
-  MESSAGE_SIN_RESULTADOS
+  MESSAGE_SIN_RESULTADOS,
+  CODE_SUCCESS,
+  CODE_NOT_FOUND
 } from '../constansts'
 import { HttpClientService } from '../service/http-client.service'
 
@@ -81,13 +83,13 @@ const getPartidas = async (req, res) => {
       }
       if (partidas) {
         controlExcepcion = {
-          codigo: '200',
+          codigo: CODE_SUCCESS,
           mensaje: MESSAGE_EXITOSO
         }
         listaPrendasAsociadas.push(JSON.parse(partidas))
       } else {
         controlExcepcion = {
-          codigo: '404',
+          codigo: CODE_NOT_FOUND,
           mensaje: MESSAGE_SIN_RESULTADOS
         }
       }
