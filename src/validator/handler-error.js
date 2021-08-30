@@ -4,7 +4,6 @@ import { Response } from '../commons/response'
 import { CODE_INTERNAL_SERVER_ERROR } from '../constansts'
 import {
   BadRequestException,
-  ConflictException,
   InternalServerException,
   CommonException
 } from '../commons/exceptions'
@@ -28,7 +27,6 @@ module.exports = (res, e) => {
   }
 
   if (e instanceof BadRequestException) statusCode = 400
-  if (e instanceof ConflictException) statusCode = 409
   if (e instanceof InternalServerException) statusCode = 500
 
   const { code, mergeVariables } = e

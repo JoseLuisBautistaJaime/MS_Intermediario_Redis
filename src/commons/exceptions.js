@@ -10,31 +10,9 @@ export class BadRequestException {
   }
 }
 
-export class ConflictException {
-  constructor(message) {
-    this.name = 'Conflict'
-    this.code = message.code
-    this.statusCode = message.statusCode
-    this.message = message.message
-    this.mergeVariables = message.mergeVariables
-    this.stack = new Error().stack
-  }
-}
-
 export class InternalServerException {
   constructor(message) {
     this.name = 'Internal Server Error'
-    this.code = message.code
-    this.statusCode = message.statusCode
-    this.message = message.message
-    this.mergeVariables = message.mergeVariables
-    this.stack = new Error().stack
-  }
-}
-
-export class BussinessException {
-  constructor(message) {
-    this.name = 'Bussiness Error'
     this.code = message.code
     this.statusCode = message.statusCode
     this.message = message.message
