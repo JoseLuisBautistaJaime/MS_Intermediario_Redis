@@ -57,6 +57,7 @@ app.use((error, req, res, next) => {
   } else {
     res.json(Response.InernalError(res))
   }
+  next()
 })
 
 app.listen(PORT, appEnv.bind, () =>

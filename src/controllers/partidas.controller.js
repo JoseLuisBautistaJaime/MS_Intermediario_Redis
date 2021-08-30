@@ -63,7 +63,7 @@ const savePartida = async (req, res) => {
     return handlerError(res, err)
   }
 }
-
+// eslint-disable-next-line consistent-return
 const getPartidas = async (req, res) => {
   LOG.info('CTRL: Starting getPartidas method')
   try {
