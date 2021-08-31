@@ -2,7 +2,6 @@ import newrelic from 'newrelic'
 import express from 'express'
 import httpContext from 'express-http-context'
 import bodyParser from 'body-parser'
-import cors from 'cors'
 import cfenv from 'cfenv'
 import { CONTEXT_NAME, CONTEXT_VERSION } from '../constansts'
 import LOG from '../commons/logger'
@@ -25,16 +24,6 @@ app.use((req, res, next) => {
 app.locals.newrelic = newrelic
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
-const corsOptionsDelegate = (req, callback) => {
-  const regex = new RegExp('(http|https)://[A-Za-z0-9-.]+.nmp.com.mx')
-  const corsOptions = regex.test(req.header('Origin'))
-    ? { origin: true }
-    : { origin: false }
-  callback(null, corsOptions)
-}
-
-app.use(cors(corsOptionsDelegate))
 
 app.use(`/${CONTEXT_NAME}/${CONTEXT_VERSION}`, appRoutes)
 

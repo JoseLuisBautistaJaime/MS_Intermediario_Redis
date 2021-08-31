@@ -40,9 +40,7 @@ const LOG = log4JS.getLogger('infoPrenda')
 LOG.level = process.env.LOG_LEVEL || 'debug'
 
 LOG.debugJSON = (message, json) => {
-  if (LOG.isDebugEnabled()) {
-    LOG.debug(`${message}: ${JSON.stringify(json)}`)
-  }
+  LOG.debug(`${message}: ${JSON.stringify(json)}`)
 }
 
 module.exports = LOG
