@@ -12,7 +12,7 @@ export const MESSAGES = {
     description: 'Petición mal formada.'
   },
   'NMP-API-REDIS-401': {
-     description: 'Se ha producido un error de autorización'
+    description: 'Se ha producido un error de autorización'
   },
   'NMP-API-REDIS-403': {
     description: 'Se ha producido un error de autorización'
