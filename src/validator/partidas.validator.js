@@ -36,11 +36,11 @@ const partidaInfoprendaRequest = {
     },
     incremento: {
       type: 'number',
-      required: true
+      required: false
     },
     desplazamiento: {
       type: 'string',
-      required: true
+      required: false
     },
     ramo: {
       type: 'string',
