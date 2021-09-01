@@ -11,6 +11,7 @@ import {
   CODE_SUCCESS,
   CODE_NOT_FOUND
 } from '../constansts'
+import { BadRequestException, createMessageError } from '../commons/exceptions'
 import { HttpClientService } from '../service/http-client.service'
 
 const { HttpMethod } = HttpClientService
@@ -47,10 +48,29 @@ const savePartida = async (req, res) => {
       PartidasValidator.partidaInfoprendaRequest
     )
     if (validator.errors.length) handlerErrorValidation(validator)
-    const canal = req.header('Canal') || 'FMP'
+    if (!req.header('Canal')) {
+      throw new BadRequestException(
+        createMessageError('NMP-API-REDIS-400', {
+          message: 'El header Canal es requerido'
+        })
+      )
+    }
+    if (!req.header('Folio')) {
+      throw new BadRequestException(
+        createMessageError('NMP-API-REDIS-400', {
+          message: 'El header Folio es requerido'
+        })
+      )
+    }
+    const canal = req.header('Canal')
+    const folio = canal.concat('-', req.header('Folio'))
+    const request = {
+      ...data,
+      folio
+    }
 
-    LOG.debugJSON('Request', data)
-    const message = JSON.stringify(data)
+    LOG.debugJSON('Request', request)
+    const message = JSON.stringify(request)
     client.publish(canal, message, function onError(err, reply) {
       if (err) {
         LOG.error(err)

@@ -52,6 +52,8 @@ describe('POST /infoprenda', () => {
             .post(
                 `/${contex}/${version}/infoprenda`
             )
+            .set('Canal', 'CanalMock')
+            .set('Folio', 'Folio123')
             .send(requestBody)
             .end((err, res) => {
                 res.should.have.status(200)
@@ -68,7 +70,7 @@ describe('POST /infoprenda BADREQUEST', () => {
             successful: true
         })
 
-    it('Debe lanzar un error 400 por inconsistencias', done => {
+    it('Debe lanzar un error 400 por parametros Faltantes', done => {
         const requestBody = {
             idCliente: 22170,
             calificacionAjustada: 10,
@@ -108,6 +110,78 @@ describe('POST /infoprenda BADREQUEST', () => {
                 `/${contex}/${version}/infoprenda`
             )
             .send('')
+            .end((err, res) => {
+                res.should.have.status(400)
+                done()
+            })
+    })
+})
+
+describe('POST /infoprenda Cabecera Canal Faltante', () => {
+    nock(URL_OAUTH_VALIDATOR)
+        .post(`/token`)
+        .reply(200, {
+            successful: true
+        })
+
+    it('Debe lanzar un error por Cabecera Canal Faltante', done => {
+        const requestBody = {
+            idCliente: '22170',
+            nivelCliente: 'DIAMANTE',
+            calificacionAjustada: 10,
+            calificacionSiva2: 7,
+            gramaje: 1,
+            rango: 'F5',
+            kilataje: 12,
+            incremento: 25,
+            desplazamiento: '5',
+            ramo: 'Alhajas',
+            subramo: 'Alhajas'
+        }
+        chai
+            .request(app)
+            .post(
+                `/${contex}/${version}/infoprenda`
+            )
+            .set('Folio', 'Folio123')
+            .send(requestBody)
+            .end((err, res) => {
+                res.should.have.status(400)
+                done()
+            })
+    })
+
+
+})
+
+
+describe('POST /infoprenda Cabecera Folio Faltante', () => {
+    nock(URL_OAUTH_VALIDATOR)
+        .post(`/token`)
+        .reply(200, {
+            successful: true
+        })
+    it('Debe lanzar un error por Cabecera Folio Faltante', done => {
+        const requestBody = {
+            idCliente: '22170',
+            nivelCliente: 'DIAMANTE',
+            calificacionAjustada: 10,
+            calificacionSiva2: 7,
+            gramaje: 1,
+            rango: 'F5',
+            kilataje: 12,
+            incremento: 25,
+            desplazamiento: '5',
+            ramo: 'Alhajas',
+            subramo: 'Alhajas'
+        }
+        chai
+            .request(app)
+            .post(
+                `/${contex}/${version}/infoprenda`
+            )
+            .set('Canal', 'CanalMock')
+            .send(requestBody)
             .end((err, res) => {
                 res.should.have.status(400)
                 done()
