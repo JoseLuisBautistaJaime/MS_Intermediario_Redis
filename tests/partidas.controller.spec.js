@@ -52,6 +52,9 @@ describe('POST /infoprenda', () => {
             .post(
                 `/${contex}/${version}/infoprenda`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
             .set('Canal', 'CanalMock')
             .set('Folio', 'Folio123')
             .send(requestBody)
@@ -88,6 +91,11 @@ describe('POST /infoprenda BADREQUEST', () => {
             .post(
                 `/${contex}/${version}/infoprenda`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
+            .set('Canal', 'CanalMock')
+            .set('Folio', 'Folio123')
             .send(requestBody)
             .end((err, res) => {
                 res.should.have.status(400)
@@ -109,6 +117,11 @@ describe('POST /infoprenda BADREQUEST', () => {
             .post(
                 `/${contex}/${version}/infoprenda`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
+            .set('Canal', 'CanalMock')
+            .set('Folio', 'Folio123')
             .send('')
             .end((err, res) => {
                 res.should.have.status(400)
@@ -143,6 +156,9 @@ describe('POST /infoprenda Cabecera Canal Faltante', () => {
             .post(
                 `/${contex}/${version}/infoprenda`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
             .set('Folio', 'Folio123')
             .send(requestBody)
             .end((err, res) => {
@@ -180,6 +196,9 @@ describe('POST /infoprenda Cabecera Folio Faltante', () => {
             .post(
                 `/${contex}/${version}/infoprenda`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
             .set('Canal', 'CanalMock')
             .send(requestBody)
             .end((err, res) => {
@@ -216,7 +235,12 @@ describe('POST /infoprenda UNAUTHORIZED', () => {
             .request(app)
             .post(
                 `/${contex}/${version}/infoprenda`
-            )
+            )           
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
+            .set('Canal', 'CanalMock')
+            .set('Folio', 'Folio123')
             .send(requestBody)
             .end((err, res) => {
                 res.should.have.status(401)
@@ -239,6 +263,9 @@ describe('GET /infoprenda?id=', () => {
             .get(
                 `/${contex}/${version}/infoprenda?id=${id}`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
             .end((err, res) => {
                 res.should.have.status(200)
                 done()
@@ -260,6 +287,9 @@ describe('GET /infoprenda?id=', () => {
             .get(
                 `/${contex}/${version}/infoprenda?id=${id}`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
             .end((err, res) => {
                 res.should.have.status(200)
                 done()
@@ -284,6 +314,9 @@ describe('GET /infoprenda?id= -UNAUTHORIZED', () => {
             .get(
                 `/${contex}/${version}/infoprenda?id=${id}`
             )
+            .set('idConsumidor', '1')
+            .set('idDestino', '1')
+            .set('oauth.bearer', '2479ryefiudh=')
             .end((err, res) => {
                 res.should.have.status(401)
                 done()

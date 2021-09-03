@@ -11,6 +11,8 @@ import {
   CODE_SUCCESS,
   CODE_NOT_FOUND,
   CODE_BAD_REQUEST,
+  HEADER_ID_CONSUMIDOR,
+  HEADER_ID_DESTINO,
   HEADER_OAUTH,
   HEADER_FOLIO,
   HEADER_CANAL
@@ -20,8 +22,21 @@ import { HttpClientService } from '../service/http-client.service'
 
 const { HttpMethod } = HttpClientService
 
+const validarHeader = async (req, header) => {
+  if (!req.header(header)) {
+    throw new BadRequestException(
+      createMessageError(CODE_BAD_REQUEST, {
+        message: 'El header '.concat(header, ' es requerido')
+      })
+    )
+  }
+}
+
 const validarToken = async req => {
   LOG.debug('CTRL: Starting validarToken method')
+  await validarHeader(req, HEADER_ID_CONSUMIDOR)
+  await validarHeader(req, HEADER_ID_DESTINO)
+  await validarHeader(req, HEADER_OAUTH)
   const token = req.header(HEADER_OAUTH)
   const httpMetadata = {
     url: `${URL_OAUTH_VALIDATOR}/token`,
@@ -52,20 +67,8 @@ const savePartida = async (req, res) => {
       PartidasValidator.partidaInfoprendaRequest
     )
     if (validator.errors.length) handlerErrorValidation(validator)
-    if (!req.header(HEADER_CANAL)) {
-      throw new BadRequestException(
-        createMessageError(CODE_BAD_REQUEST, {
-          message: 'El header '.concat(HEADER_CANAL, ' es requerido')
-        })
-      )
-    }
-    if (!req.header(HEADER_FOLIO)) {
-      throw new BadRequestException(
-        createMessageError(CODE_BAD_REQUEST, {
-          message: 'El header '.concat(HEADER_FOLIO, ' es requerido')
-        })
-      )
-    }
+    await validarHeader(req, HEADER_CANAL)
+    await validarHeader(req, HEADER_FOLIO)
     const canal = req.header(HEADER_CANAL)
     const folio = canal.concat('-', req.header(HEADER_FOLIO))
     const request = {

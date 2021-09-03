@@ -25,5 +25,7 @@ export const { LOG_LEVEL } = process.env
 export const { URL_OAUTH_VALIDATOR } = process.env
 // Headers
 export const HEADER_OAUTH = 'oauth.bearer'
+export const HEADER_ID_CONSUMIDOR = 'idConsumidor'
+export const HEADER_ID_DESTINO = 'idDestino'
 export const HEADER_FOLIO = 'Folio'
 export const HEADER_CANAL = 'Canal'
