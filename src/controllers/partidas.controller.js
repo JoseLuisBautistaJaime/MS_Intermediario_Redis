@@ -9,7 +9,11 @@ import {
   MESSAGE_EXITOSO,
   MESSAGE_SIN_RESULTADOS,
   CODE_SUCCESS,
-  CODE_NOT_FOUND
+  CODE_NOT_FOUND,
+  CODE_BAD_REQUEST,
+  HEADER_OAUTH,
+  HEADER_FOLIO,
+  HEADER_CANAL
 } from '../constansts'
 import { BadRequestException, createMessageError } from '../commons/exceptions'
 import { HttpClientService } from '../service/http-client.service'
@@ -18,7 +22,7 @@ const { HttpMethod } = HttpClientService
 
 const validarToken = async req => {
   LOG.debug('CTRL: Starting validarToken method')
-  const token = req.header('oauth.bearer')
+  const token = req.header(HEADER_OAUTH)
   const httpMetadata = {
     url: `${URL_OAUTH_VALIDATOR}/token`,
     method: HttpMethod.POST,
@@ -48,22 +52,22 @@ const savePartida = async (req, res) => {
       PartidasValidator.partidaInfoprendaRequest
     )
     if (validator.errors.length) handlerErrorValidation(validator)
-    if (!req.header('Canal')) {
+    if (!req.header(HEADER_CANAL)) {
       throw new BadRequestException(
-        createMessageError('NMP-API-REDIS-400', {
-          message: 'El header Canal es requerido'
+        createMessageError(CODE_BAD_REQUEST, {
+          message: 'El header '.concat(HEADER_CANAL, ' es requerido')
         })
       )
     }
-    if (!req.header('Folio')) {
+    if (!req.header(HEADER_FOLIO)) {
       throw new BadRequestException(
-        createMessageError('NMP-API-REDIS-400', {
-          message: 'El header Folio es requerido'
+        createMessageError(CODE_BAD_REQUEST, {
+          message: 'El header '.concat(HEADER_FOLIO, ' es requerido')
         })
       )
     }
-    const canal = req.header('Canal')
-    const folio = canal.concat('-', req.header('Folio'))
+    const canal = req.header(HEADER_CANAL)
+    const folio = canal.concat('-', req.header(HEADER_FOLIO))
     const request = {
       ...data,
       folio
