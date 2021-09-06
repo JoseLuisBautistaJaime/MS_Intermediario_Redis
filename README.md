@@ -11,7 +11,7 @@ Este API se encarga de actuar como intermediario entre redis y los procesos de m
 
 _En caso de necesitar realizar cambios en el código, solicitar acceso a la siguiente ubicación del repositorio en GIT_
 
-https://github.com/MontePiedadMx/Habilitador_Tecnologico_API_Producto.git
+https://github.com/MontePiedadMx/MS_Intermediario_Redis.git
 
 Ver la sección **Despliegue** para conocer cómo desplegar el proyecto.
 
@@ -19,8 +19,8 @@ Ver la sección **Despliegue** para conocer cómo desplegar el proyecto.
 
 _Es necesario tener las siguientes herramientas_
 
-- node versión 10.15.3 o superior
-- node package manager versión 6.4.1 o superior
+- node versión 12.18.3 o superior
+- node package manager versión 6.14.6 o superior
 
 verificar con los siguientes comandos:
 
