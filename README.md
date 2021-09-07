@@ -42,7 +42,7 @@ Para los diferentes ambientes es necesario especificar las urls a redireccionar
 NODE_ENV: Ambiente en donde se despliega la aplicación [ LOCAL ,DEV , TEST, PROD ]
 CONTEXT_NAME: Contexto del API [api]/[partidas]
 CONTEXT_VERSION: Versión del API
-API_RIESGO_SERVER: URL del servidor del Api Riesgos
+URL_OAUTH_VALIDATOR: URL del servidor para la validación de token
 ```
 
 Para análisis de pruebas Sonar
@@ -114,4 +114,3 @@ Desarrollado para Nacional Monte de Piedad por
 
 ## Bitácora :heavy_check_mark:
 - Versión Inicial
-
