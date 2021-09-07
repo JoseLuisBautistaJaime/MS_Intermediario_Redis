@@ -101,6 +101,14 @@ const getPartidas = async (req, res) => {
       return Response.Unauthorized(res)
     }
 
+    if (!req.query.id) {
+      throw new BadRequestException(
+        createMessageError(CODE_BAD_REQUEST, {
+          message: 'El id de partida es requerido'
+        })
+      )
+    }
+
     client.get(req.query.id, async (err, partidas) => {
       const listaPrendasAsociadas = []
       let controlExcepcion = {}
