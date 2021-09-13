@@ -1,0 +1,934 @@
+{
+	"info": {
+		"_postman_id": "f20e4ae0-0e80-44e5-8228-14a4d7b420ca",
+		"name": "NMP_Infoprenda_Ms_IntermediarioRedis_Pruebas_Unitarias_v1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Seguridad",
+			"item": [
+				{
+					"name": "OAuth Client Credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"token_InfoPrenda_dev\", data.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "usuario",
+								"value": "usuario",
+								"type": "text"
+							},
+							{
+								"key": "idConsumidor",
+								"value": "17",
+								"type": "text"
+							},
+							{
+								"key": "idDestino",
+								"value": "20",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "UserProfile.me",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://iamdr.montepiedad.com.mx:4444/NMP/oauth2/v1",
+							"protocol": "https",
+							"host": [
+								"iamdr",
+								"montepiedad",
+								"com",
+								"mx"
+							],
+							"port": "4444",
+							"path": [
+								"NMP",
+								"oauth2",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DEV",
+			"item": [
+				{
+					"name": "C01. Almacenar una partida - Ok",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de respuesta debe ser 200.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Codigo existoso.', function() {\r",
+									"  pm.expect(pm.response.json().status).eq('SUCCESS');\r",
+									"});\r",
+									"\r",
+									"pm.test('Message existoso.', function() {\r",
+									"    pm.expect(pm.response.json().message\r",
+									"    ).eq(\"Se ha realizado correctamente la operación\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "idConsumidor",
+								"value": "17",
+								"type": "text"
+							},
+							{
+								"key": "idDestino",
+								"value": "100",
+								"type": "text"
+							},
+							{
+								"key": "oauth.bearer",
+								"value": "{{token_InfoPrenda_dev}}",
+								"type": "text"
+							},
+							{
+								"key": "UnidadOrganizacional",
+								"value": "NMP",
+								"type": "text"
+							},
+							{
+								"key": "Producto",
+								"value": "Infoprenda",
+								"type": "text"
+							},
+							{
+								"key": "Operacion",
+								"value": "Almacenar partida",
+								"type": "text"
+							},
+							{
+								"key": "Trigger",
+								"value": "MIDAS",
+								"type": "text"
+							},
+							{
+								"key": "Evento",
+								"value": "POST",
+								"type": "text"
+							},
+							{
+								"key": "Folio",
+								"value": "22170-23-1628783013127",
+								"type": "text"
+							},
+							{
+								"key": "Canal",
+								"value": "Infoprenda",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCliente\": \"22170\",\r\n    \"folio\": \"FOLIO1\",\r\n    \"nivelCliente\": \"DIAMANTE\",\r\n    \"calificacionAjustada\": 10,\r\n    \"calificacionSiva2\": 7,\r\n    \"gramaje\": 1,\r\n    \"rango\": \"F5\",\r\n    \"kilataje\": 12,\r\n    \"incremento\": 25,\r\n    \"desplazamiento\": \"5\",\r\n    \"ramo\": \"Alhajas\",\r\n    \"subramo\": \"Alhajas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/infoprenda",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								"infoprenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C02. Almacenar una partida - BadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Petición mal formada.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Código de error', function() {\r",
+									"  pm.expect(pm.response.json().code).eq('NMP-API-REDIS-400');\r",
+									"});\r",
+									"pm.test('Message no vacío', function() {\r",
+									"    pm.expect(pm.response.json().message\r",
+									"    ).not.eq(undefined);\r",
+									"});\r",
+									"\r",
+									"pm.test('Descriptión error', function() {\r",
+									"    pm.expect(pm.response.json().description\r",
+									"    ).eq(\"Petición mal formada.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "idConsumidor",
+								"value": "17",
+								"type": "text"
+							},
+							{
+								"key": "idDestino",
+								"value": "100",
+								"type": "text"
+							},
+							{
+								"key": "oauth.bearer",
+								"value": "{{token_InfoPrenda_dev}}",
+								"type": "text"
+							},
+							{
+								"key": "UnidadOrganizacional",
+								"value": "NMP",
+								"type": "text"
+							},
+							{
+								"key": "Producto",
+								"value": "Infoprenda",
+								"type": "text"
+							},
+							{
+								"key": "Operacion",
+								"value": "Almacenar partida",
+								"type": "text"
+							},
+							{
+								"key": "Trigger",
+								"value": "MIDAS",
+								"type": "text"
+							},
+							{
+								"key": "Evento",
+								"value": "POST",
+								"type": "text"
+							},
+							{
+								"key": "Folio",
+								"value": "22170-23-1628783013127",
+								"type": "text"
+							},
+							{
+								"key": "Canal",
+								"value": "Infoprenda",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"calificacionSiva2\": 7,\r\n    \"gramaje\": 1,\r\n    \"rango\": \"F5\",\r\n    \"kilataje\": 12,\r\n    \"incremento\": 25,\r\n    \"desplazamiento\": \"5\",\r\n    \"ramo\": \"Alhajas\",\r\n    \"subramo\": \"Alhajas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/infoprenda",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								"infoprenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C03. Almacenar una partida - Unauthorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Codigo Unauthorized.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([401]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Codigo no autorizado.', function() {\r",
+									"  pm.expect(pm.response.json().code).eq('NMP-API-REDIS-401');\r",
+									"});\r",
+									"\r",
+									"pm.test('Message error de autorización.', function() {\r",
+									"    pm.expect(pm.response.json().message\r",
+									"    ).eq(\"Se ha producido un error de autorización\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "idConsumidor",
+								"value": "17",
+								"type": "text"
+							},
+							{
+								"key": "idDestino",
+								"value": "100",
+								"type": "text"
+							},
+							{
+								"key": "oauth.bearer",
+								"value": "eyJhbGciOiNoFuncion4==",
+								"type": "text"
+							},
+							{
+								"key": "UnidadOrganizacional",
+								"value": "NMP",
+								"type": "text"
+							},
+							{
+								"key": "Producto",
+								"value": "Infoprenda",
+								"type": "text"
+							},
+							{
+								"key": "Operacion",
+								"value": "Almacenar partida",
+								"type": "text"
+							},
+							{
+								"key": "Trigger",
+								"value": "MIDAS",
+								"type": "text"
+							},
+							{
+								"key": "Evento",
+								"value": "POST",
+								"type": "text"
+							},
+							{
+								"key": "Folio",
+								"value": "22170-23-1628783013127",
+								"type": "text"
+							},
+							{
+								"key": "Canal",
+								"value": "Infoprenda",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idCliente\": \"22170\",\r\n  \"folio\":\"FOLIO1\",\r\n  \"nivelCliente\": \"DIAMANTE\",\r\n  \"calificacionAjustada\": 10,\r\n  \"calificacionSiva2\": 7,\r\n  \"gramaje\": 1,\r\n  \"rango\": \"F5\",\r\n  \"kilataje\": 12,\r\n  \"incremento\": 25,\r\n  \"desplazamiento\": \"5\",\r\n  \"ramo\": \"Alhajas\",\r\n  \"subramo\": \"Alhajas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/infoprenda",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								"infoprenda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C04. Recuperar partidas - Ok",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Consulta correcta.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Codigo existoso.', function() {\r",
+									"  pm.expect(pm.response.json().controlExcepcion.codigo).eq('NMP-API-REDIS-200');\r",
+									"});\r",
+									"\r",
+									"pm.test('Mensaje  existoso.', function() {\r",
+									"    pm.expect(pm.response.json().controlExcepcion.mensaje\r",
+									"    ).eq(\"Resultado Exitoso\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Existen elementos.', function() {\r",
+									"    pm.expect(pm.response.json().listaPrendasAsociadas\r",
+									"    ).length > 0\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "idConsumidor",
+								"value": "17",
+								"type": "text"
+							},
+							{
+								"key": "idDestino",
+								"value": "100",
+								"type": "text"
+							},
+							{
+								"key": "oauth.bearer",
+								"value": "{{token_InfoPrenda_dev}}",
+								"type": "text"
+							},
+							{
+								"key": "Canal",
+								"value": "Infoprenda",
+								"type": "text"
+							},
+							{
+								"key": "Folio",
+								"value": "22170-23-1628783013127",
+								"type": "text"
+							},
+							{
+								"key": "Trigger",
+								"value": "MIDAS",
+								"type": "text"
+							},
+							{
+								"key": "Evento",
+								"value": "GET",
+								"type": "text"
+							},
+							{
+								"key": "Operacion",
+								"value": "Recuperar partidas",
+								"type": "text"
+							},
+							{
+								"key": "idSucursal",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Usuario",
+								"value": "midas",
+								"type": "text"
+							},
+							{
+								"key": "NombreUsuario",
+								"value": "midas",
+								"type": "text"
+							},
+							{
+								"key": "UnidadOrganizacional",
+								"value": "NMP",
+								"type": "text"
+							},
+							{
+								"key": "Producto",
+								"value": "Infoprenda",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/infoprenda?id=Infoprenda-22170-23-1628783013127",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								"infoprenda"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "Infoprenda-22170-23-1628783013127"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C05. Recuperar partidas - SinResultados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Consulta correcta.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Código  no encontrado.', function() {\r",
+									"  pm.expect(pm.response.json().controlExcepcion.codigo).eq('NMP-API-REDIS-404');\r",
+									"});\r",
+									"\r",
+									"pm.test('Mensaje si prendas recuperadas.', function() {\r",
+									"    pm.expect(pm.response.json().controlExcepcion.mensaje\r",
+									"    ).eq(\"No se encontraron prendas recuperadas candidatas a beneficio Infoprenda\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Sin elementos.', function() {\r",
+									"    pm.expect(pm.response.json().listaPrendasAsociadas\r",
+									"    ).to.be.empty\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "idConsumidor",
+								"value": "17",
+								"type": "text"
+							},
+							{
+								"key": "idDestino",
+								"value": "100",
+								"type": "text"
+							},
+							{
+								"key": "oauth.bearer",
+								"value": "{{token_InfoPrenda_dev}}",
+								"type": "text"
+							},
+							{
+								"key": "Canal",
+								"value": "Infoprenda",
+								"type": "text"
+							},
+							{
+								"key": "Folio",
+								"value": "22170-23-1628783013127",
+								"type": "text"
+							},
+							{
+								"key": "Trigger",
+								"value": "MIDAS",
+								"type": "text"
+							},
+							{
+								"key": "Evento",
+								"value": "GET",
+								"type": "text"
+							},
+							{
+								"key": "Operacion",
+								"value": "Recuperar partidas",
+								"type": "text"
+							},
+							{
+								"key": "idSucursal",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Usuario",
+								"value": "midas",
+								"type": "text"
+							},
+							{
+								"key": "NombreUsuario",
+								"value": "midas",
+								"type": "text"
+							},
+							{
+								"key": "UnidadOrganizacional",
+								"value": "NMP",
+								"type": "text"
+							},
+							{
+								"key": "Producto",
+								"value": "Infoprenda",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/infoprenda?id=Noexiste-1234567",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								"infoprenda"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "Noexiste-1234567"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C06. Entpoint - No existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código de respuesta debe ser 404.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Código no recurso no existente.', function() {\r",
+									"  pm.expect(pm.response.json().code).eq('NMP-API-REDIS-404');\r",
+									"});\r",
+									"\r",
+									"pm.test('Mensaje si resultados.', function() {\r",
+									"    pm.expect(pm.response.json().message\r",
+									"    ).eq(\"No se encontraron resultados.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "ssKie613u5u3QEOndkH3",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "midas",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/infoprendaNoexite",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								"infoprendaNoexite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "C07. HealthCheck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Operación correcta.\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Código exitoso.', function() {\r",
+									"  pm.expect(pm.response.json().status).eq('SUCCESS');\r",
+									"});\r",
+									"\r",
+									"pm.test('Mensaje exitoso.', function() {\r",
+									"    pm.expect(pm.response.json().message\r",
+									"    ).eq(\"Se ha realizado correctamente la operación\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://dev1775-ms-intermediario-redis.mybluemix.net/api/partidas/v1/",
+							"protocol": "http",
+							"host": [
+								"dev1775-ms-intermediario-redis",
+								"mybluemix",
+								"net"
+							],
+							"path": [
+								"api",
+								"partidas",
+								"v1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
