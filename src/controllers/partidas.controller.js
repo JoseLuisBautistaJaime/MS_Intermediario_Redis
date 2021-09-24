@@ -110,7 +110,6 @@ const getPartidas = async (req, res) => {
     }
 
     client.get(req.query.id, async (err, partidas) => {
-
       let response = {}
       let controlExcepcion = {}
       if (err) {
@@ -122,7 +121,7 @@ const getPartidas = async (req, res) => {
           codigo: CODE_SUCCESS,
           mensaje: MESSAGE_EXITOSO
         }
-        LOG.debug("----->partidas:", partidas)
+        LOG.debug('-->partidas:', partidas)
         let listaPrendasAsociadas = JSON.parse(partidas)
         response = {
           ...listaPrendasAsociadas,
@@ -134,7 +133,7 @@ const getPartidas = async (req, res) => {
           mensaje: MESSAGE_SIN_RESULTADOS
         }
 
-        response = {          
+        response = {
           listaPrendasAsociadas: [],
           controlExcepcion
         }

@@ -7,10 +7,7 @@ if (url === undefined) {
   process.exit(1)
 }
 
-
-
 const client = redis.createClient(url)
-
 
 client.on('connect', function onConect() {
   LOG.info(`Redis connected!!! on ${url}`)
