@@ -110,7 +110,8 @@ const getPartidas = async (req, res) => {
     }
 
     client.get(req.query.id, async (err, partidas) => {
-      const listaPrendasAsociadas = []
+
+      let response = {}
       let controlExcepcion = {}
       if (err) {
         LOG.error(err)
@@ -121,17 +122,25 @@ const getPartidas = async (req, res) => {
           codigo: CODE_SUCCESS,
           mensaje: MESSAGE_EXITOSO
         }
-        listaPrendasAsociadas.push(JSON.parse(partidas))
+        LOG.debug("----->partidas:", partidas)
+        let listaPrendasAsociadas = JSON.parse(partidas)
+        response = {
+          ...listaPrendasAsociadas,
+          controlExcepcion
+        }
       } else {
         controlExcepcion = {
           codigo: CODE_NOT_FOUND,
           mensaje: MESSAGE_SIN_RESULTADOS
         }
+
+        response = {          
+          listaPrendasAsociadas: [],
+          controlExcepcion
+        }
       }
-      return res.status(200).send({
-        controlExcepcion,
-        listaPrendasAsociadas
-      })
+
+      return res.status(200).send(response)
     })
     LOG.info('CTRL: Ending getPartidas method')
   } catch (err) {
