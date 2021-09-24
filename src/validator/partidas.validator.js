@@ -8,30 +8,34 @@ const partidaInfoprendaRequest = {
   properties: {
     idCliente: {
       type: 'string',
-      required: true
+      required: false
     },
     nivelCliente: {
       type: 'string',
-      required: true
+      required: false
     },
     calificacionAjustada: {
       type: 'number',
-      required: true
+      required: false
     },
     calificacionSiva2: {
       type: 'number',
-      required: true
+      required: false
     },
     gramaje: {
       type: 'number',
-      required: true
+      required: false
     },
-    rango: {
-      type: 'string',
-      required: true
+    metal: {
+      type: 'number',
+      required: false
     },
     kilataje: {
       type: 'number',
+      required: false
+    },
+    rango: {
+      type: 'string',
       required: true
     },
     incremento: {
@@ -44,7 +48,7 @@ const partidaInfoprendaRequest = {
     },
     ramo: {
       type: 'string',
-      required: true
+      required: false
     },
     subramo: {
       type: 'string',
