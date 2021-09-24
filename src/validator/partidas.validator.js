@@ -15,18 +15,14 @@ const partidaInfoprendaRequest = {
       required: false
     },
     calificacionAjustada: {
-      type: 'number',
+      type: 'number | null',
       required: false
     },
     calificacionSiva2: {
-      type: 'number',
+      type: 'number | null',
       required: false
     },
     gramaje: {
-      type: 'number',
-      required: false
-    },
-    metal: {
       type: 'number',
       required: false
     },
@@ -39,15 +35,15 @@ const partidaInfoprendaRequest = {
       required: true
     },
     incremento: {
-      type: 'number',
+      type: 'number | null',
       required: false
     },
     desplazamiento: {
-      type: 'string',
+      type: 'string | null',
       required: false
     },
     ramo: {
-      type: 'string',
+      type: 'string | null',
       required: false
     },
     subramo: {
