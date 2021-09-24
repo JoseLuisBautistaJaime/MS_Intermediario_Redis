@@ -139,15 +139,15 @@ describe('POST /infoprenda Cabecera Canal Faltante', () => {
 
     it('Debe lanzar un error por Cabecera Canal Faltante', done => {
         const requestBody = {
-            idCliente: '22170',
+            idCliente: '3637017',
             nivelCliente: 'DIAMANTE',
             calificacionAjustada: 10,
             calificacionSiva2: 7,
-            gramaje: 1,
-            rango: 'F5',
-            kilataje: 12,
-            incremento: 25,
-            desplazamiento: '5',
+            gramaje: 9.4,
+            rango: 'F4',
+            kilataje: 14.0,
+            incremento: 15.0,
+            desplazamiento: '5.0',
             ramo: 'Alhajas',
             subramo: 'Alhajas'
         }
@@ -235,7 +235,7 @@ describe('POST /infoprenda UNAUTHORIZED', () => {
             .request(app)
             .post(
                 `/${contex}/${version}/infoprenda`
-            )           
+            )
             .set('idConsumidor', '1')
             .set('idDestino', '1')
             .set('oauth.bearer', '2479ryefiudh=')
@@ -257,7 +257,7 @@ describe('GET /infoprenda?id=', () => {
         })
 
     it('Debe recuperar una partida', done => {
-        const id = 'nmp-al-al-108423423'
+        const id = 'CanalMock-Folio123'
         chai
             .request(app)
             .get(
