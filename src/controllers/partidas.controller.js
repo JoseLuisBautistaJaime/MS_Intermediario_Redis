@@ -63,7 +63,7 @@ const savePartida = async (req, res) => {
 
     const data = req.body
 
-    LOG.debug('Request:', data)
+    LOG.debugJSON('Request savePartida POST:', data)
     const validator = PartidasValidator.ValidatorSchema.validate(
       data,
       PartidasValidator.partidaInfoprendaRequest
@@ -85,7 +85,7 @@ const savePartida = async (req, res) => {
         LOG.error(err)
         throw err
       }
-      LOG.debugJSON('Mensage: {} en el canal {} - {}', message, canal, reply)
+      LOG.debugJSON('Se publica mensaje: {} en el canal {} - {}', message, canal, reply)
       LOG.info('CTRL: Ending savePartida  method')
     })
     return Response.Ok(res)
