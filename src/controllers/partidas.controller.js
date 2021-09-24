@@ -62,6 +62,8 @@ const savePartida = async (req, res) => {
     }
 
     const data = req.body
+
+    LOG.debug('Request:', data)
     const validator = PartidasValidator.ValidatorSchema.validate(
       data,
       PartidasValidator.partidaInfoprendaRequest
