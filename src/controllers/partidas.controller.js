@@ -6,9 +6,7 @@ import { PartidasValidator } from '../validator/partidas.validator'
 import { handlerErrorValidation } from '../validator/message.mapping'
 import {
   URL_OAUTH_VALIDATOR,
-  MESSAGE_EXITOSO,
   MESSAGE_SIN_RESULTADOS,
-  CODE_SUCCESS,
   CODE_NOT_FOUND,
   CODE_BAD_REQUEST,
   HEADER_ID_CONSUMIDOR,
@@ -112,31 +110,30 @@ const getPartidas = async (req, res) => {
     }
 
     client.get(req.query.id, async (err, partidas) => {
-      let response = {}
-      let controlExcepcion = {}
+
       if (err) {
         LOG.error(err)
         throw err
       }
+      LOG.debug('Response partidas GET:', partidas)
       if (partidas) {
-        controlExcepcion = {
-          codigo: CODE_SUCCESS,
-          mensaje: MESSAGE_EXITOSO
-        }
-        LOG.debug('Response partidas GET:', partidas)
         let response = JSON.parse(partidas)
-        return res.status(200).send(response)
+        LOG.debugJSON('Response GET:', response)
+        let codigo = 200
+        if (response.controlExcepcion.mensaje === "No es un candidato al beneficio infoprenda") codigo = 404
+        LOG.debug('codigo:', codigo)
+        return res.status(codigo).send(response)
       } else {
-        controlExcepcion = {
+        const controlExcepcion = {
           codigo: CODE_NOT_FOUND,
           mensaje: MESSAGE_SIN_RESULTADOS
         }
 
-        response = {
+        const response = {
           listaPrendasAsociadas: [],
           controlExcepcion
         }
-        return res.status(404).send(response)
+        return res.status(200).send(response)
       }
 
     })
