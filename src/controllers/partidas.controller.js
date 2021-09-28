@@ -120,7 +120,7 @@ const getPartidas = async (req, res) => {
         let response = JSON.parse(partidas)
         LOG.debugJSON('Response GET:', response)
         let codigo = 200
-        if (response.controlExcepcion.mensaje === "No es un candidato al beneficio infoprenda") codigo = 404
+        if (response.controlExcepcion.codigo === "400") codigo = 404
         LOG.debug('codigo:', codigo)
         return res.status(codigo).send(response)
       } else {
