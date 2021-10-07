@@ -6,9 +6,7 @@ import { PartidasValidator } from '../validator/partidas.validator'
 import { handlerErrorValidation } from '../validator/message.mapping'
 import {
   URL_OAUTH_VALIDATOR,
-  MESSAGE_EXITOSO,
   MESSAGE_SIN_RESULTADOS,
-  CODE_SUCCESS,
   CODE_NOT_FOUND,
   CODE_BAD_REQUEST,
   HEADER_ID_CONSUMIDOR,
@@ -62,6 +60,8 @@ const savePartida = async (req, res) => {
     }
 
     const data = req.body
+
+    LOG.debugJSON('Request savePartida POST:', data)
     const validator = PartidasValidator.ValidatorSchema.validate(
       data,
       PartidasValidator.partidaInfoprendaRequest
@@ -83,7 +83,7 @@ const savePartida = async (req, res) => {
         LOG.error(err)
         throw err
       }
-      LOG.debugJSON('Mensage: {} en el canal {} - {}', message, canal, reply)
+      LOG.debugJSON('Se publica mensaje: {} en el canal {} - {}', message, canal, reply)
       LOG.info('CTRL: Ending savePartida  method')
     })
     return Response.Ok(res)
@@ -110,36 +110,32 @@ const getPartidas = async (req, res) => {
     }
 
     client.get(req.query.id, async (err, partidas) => {
-      let response = {}
-      let controlExcepcion = {}
+
       if (err) {
         LOG.error(err)
         throw err
       }
+      LOG.debug('Response partidas GET:', partidas)
       if (partidas) {
-        controlExcepcion = {
-          codigo: CODE_SUCCESS,
-          mensaje: MESSAGE_EXITOSO
-        }
-        LOG.debug('-->partidas:', partidas)
-        let listaPrendasAsociadas = JSON.parse(partidas)
-        response = {
-          ...listaPrendasAsociadas,
-          controlExcepcion
-        }
+        let response = JSON.parse(partidas)
+        LOG.debugJSON('Response GET:', response)
+        let codigo = 200
+        if (response.controlExcepcion.codigo === "400") codigo = 404
+        LOG.debug('codigo:', codigo)
+        return res.status(codigo).send(response)
       } else {
-        controlExcepcion = {
+        const controlExcepcion = {
           codigo: CODE_NOT_FOUND,
           mensaje: MESSAGE_SIN_RESULTADOS
         }
 
-        response = {
+        const response = {
           listaPrendasAsociadas: [],
           controlExcepcion
         }
+        return res.status(200).send(response)
       }
 
-      return res.status(200).send(response)
     })
     LOG.info('CTRL: Ending getPartidas method')
   } catch (err) {
