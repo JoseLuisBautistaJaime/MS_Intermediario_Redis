@@ -83,7 +83,7 @@ const savePartida = async (req, res) => {
         LOG.error(err)
         throw err
       }
-      LOG.debugJSON('Se publica mensaje: {} en el canal {} - {}', message, canal, reply)
+      LOG.debugJSON(`Se publica mensaje:${message} en el canal:${canal}`)
       LOG.info('CTRL: Ending savePartida  method')
     })
     return Response.Ok(res)
