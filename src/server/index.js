@@ -24,6 +24,12 @@ app.use((req, res, next) => {
 app.locals.newrelic = newrelic
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
+  next()
+})
 
 app.use(`/${CONTEXT_NAME}/${CONTEXT_VERSION}`, appRoutes)
 

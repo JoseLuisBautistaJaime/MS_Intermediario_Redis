@@ -77,6 +77,11 @@ _Para la ejecución de las pruebas, no es nesaria la instalacción de otras herr
 npm run test
 
 ```
+## Pruebas de estrés
+|Número peticiones | Operación/Recurso |Destino | intentos x petición |Tiempo Minimo | Tiempo Maximo|Tiempo Medio
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |----------- |
+| 1000 |POST /api/partidas/v1/infoprenda | redis | 1 |470 ms | 4.6 s| 2s |
+| 1000 |GET /api/partidas/v1/infoprenda | redis | 3 |387 ms | 5.4 s | 2.1s |
 
 ### Análisis del código :nut_and_bolt:
 
