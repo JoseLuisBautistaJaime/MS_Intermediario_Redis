@@ -119,8 +119,14 @@ const getPartidas = async (req, res) => {
         const response = JSON.parse(partidas)
         LOG.debugJSON('Response GET:', response)
         let codigo = 200
-        if (response.controlExcepcion.codigo === '400') codigo = 404
-        LOG.debug('codigo:', codigo)
+        if (
+          response.controlExcepcion &&
+          response.controlExcepcion.codigo &&
+          response.controlExcepcion.codigo === '400'
+        ) {
+          codigo = 404
+          LOG.debug('codigo:', codigo)
+        }
         return res.status(codigo).send(response)
       } else {
         const controlExcepcion = {
