@@ -1,6 +1,6 @@
 import LOG from '../commons/logger'
 import { Response } from '../commons/response'
-import client from '../service/partidas.service'
+import client from '../service/partidas.redis.service'
 import handlerError from '../validator/handler-error'
 import { PartidasValidator } from '../validator/partidas.validator'
 import { handlerErrorValidation } from '../validator/message.mapping'
@@ -14,7 +14,7 @@ import {
   HEADER_OAUTH,
   HEADER_FOLIO,
   HEADER_CANAL
-} from '../constansts'
+} from '../constants'
 import { BadRequestException, createMessageError } from '../commons/exceptions'
 import { HttpClientService } from '../service/http-client.service'
 

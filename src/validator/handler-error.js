@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import LOG from '../commons/logger'
 import { Response } from '../commons/response'
-import { CODE_INTERNAL_SERVER_ERROR } from '../constansts'
+import { CODE_INTERNAL_SERVER_ERROR } from '../constants'
 import {
   BadRequestException,
   InternalServerException,

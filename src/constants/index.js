@@ -29,3 +29,11 @@ export const HEADER_ID_CONSUMIDOR = 'idConsumidor'
 export const HEADER_ID_DESTINO = 'idDestino'
 export const HEADER_FOLIO = 'Folio'
 export const HEADER_CANAL = 'Canal'
+// MQ Sender
+export const { AMQP_URI } = process.env
+export const { AMQP_MESSAGES_QUEUE } = process.env
+export const { AMQP_MESSAGES_EXCHANGE } = process.env
+export const { AMQP_CERTIFICATE } = process.env
+export const { AMQP_HAS_CERTIFICATE } = process.env
+export const { IS_RABBIT_SERVICE } = process.env
+export const { TIEMPO_ESPERA_CAMBIO_ESTADO } = process.env

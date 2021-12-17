@@ -5,7 +5,7 @@ import {
   CODE_BAD_REQUEST,
   CODE_INTERNAL_SERVER_ERROR,
   CODE_INTERNAL_BAD_GETAWAY
-} from '../constansts'
+} from '../constants'
 import { MESSAGES } from './messages'
 
 const createResponse = (res, statusCode, data = {}, code = '') => {
