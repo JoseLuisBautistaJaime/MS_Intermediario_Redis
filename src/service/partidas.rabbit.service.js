@@ -21,9 +21,11 @@ const encolaMensaje = async (idMensaje, cuerpoMensaje) => {
 const procesaMensaje = async messageRecieved => {
   LOG.debug('SERVICE: Starting procesaMensaje method')
   LOG.debug(`messageRecieved - ${JSON.stringify(messageRecieved)}`)
-  const { idMensaje, cuerpoMensaje } = messageRecieved.message
-  LOG.trace('idMensaje', idMensaje)
-  LOG.trace('cuerpoMensaje', cuerpoMensaje)
+  const { partidaFolio, clienteId, pag, tags } = messageRecieved
+  LOG.trace('partidaFolio', partidaFolio)
+  LOG.trace('clienteId', clienteId)
+  LOG.trace('pag', pag)
+  LOG.traceJSON('tags', tags)
   LOG.debug('SERVICE: Starting procesaMensaje method')
 }
 
