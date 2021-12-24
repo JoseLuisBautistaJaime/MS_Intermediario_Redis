@@ -8,7 +8,7 @@ import LOG from '../commons/logger'
 import { Response } from '../commons/response'
 import appRoutes from '../routes'
 
-const rabbitDispatch = require('../service/rabbit-dispatch.service')
+const reempenioDigitalServices = require('../service/reempenio.digital.services')
 
 const app = express()
 const appEnv = cfenv.getAppEnv()
@@ -60,6 +60,6 @@ app.use((error, req, res, next) => {
 app.listen(PORT, appEnv.bind, () =>
   LOG.info(`server running on ${appEnv.url}/${CONTEXT_NAME}/${CONTEXT_VERSION}`)
 )
-rabbitDispatch.init()
+reempenioDigitalServices.init()
 
 module.exports = app

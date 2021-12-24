@@ -22,13 +22,18 @@ export const MESSAGE_EXITOSO = 'Resultado Exitoso'
 export const MESSAGE_SIN_RESULTADOS =
   'No se encontraron prendas recuperadas candidatas a beneficio Infoprenda'
 export const { LOG_LEVEL } = process.env
-export const { URL_OAUTH_VALIDATOR } = process.env
+
 // Headers
 export const HEADER_OAUTH = 'oauth.bearer'
 export const HEADER_ID_CONSUMIDOR = 'idConsumidor'
 export const HEADER_ID_DESTINO = 'idDestino'
 export const HEADER_FOLIO = 'Folio'
 export const HEADER_CANAL = 'Canal'
+// OAUTH
+export const { URL_OAUTH_VALIDATOR } = process.env
+export const { OAUTH_AUTHORIZATION } = process.env
+export const { OAUTH_ID_DESTINO } = process.env
+export const { OAUTH_ID_CONSUMIDOR } = process.env
 // MQ Sender
 export const { AMQP_URI } = process.env
 export const { AMQP_MESSAGES_QUEUE } = process.env

@@ -7,15 +7,15 @@ import {
   createMessageError
 } from '../commons/exceptions'
 
-const agent = new https.Agent({ rejectUnauthorized: false })
-
 const HttpMethod = {
   POST: 'POST',
   GET: 'GET',
-  PUT: 'PUT',
   PATCH: 'PATCH',
+  PUT: 'PUT',
   DELETE: 'DELETE'
 }
+
+const agent = new https.Agent({ rejectUnauthorized: false })
 
 const parseResponse = res => {
   return res.json().then(responseBody => ({
@@ -25,6 +25,31 @@ const parseResponse = res => {
     statusText: res.statusText,
     headers: res.headers.raw()
   }))
+}
+
+const ejecutaOperacionFetch = async (url, isHttps, options) => {
+  // eslint-disable-next-line no-param-reassign
+  if (isHttps) options.agent = agent
+
+  try {
+    const { responseBody, ok, status } = await fetch(url, options).then(
+      parseResponse
+    )
+    LOG.debug('status', status)
+    LOG.traceJSON('response', responseBody)
+
+    if (!ok) {
+      LOG.error('ERROR: ', responseBody.descripcionError)
+    }
+    LOG.debug('SERVICE: Ending sendRequestFormData method')
+    return responseBody
+  } catch (err) {
+    if (err instanceof CommonException) throw err
+
+    throw new InternalServerException(
+      createMessageError('NMP-API-REDIS-500', { text: err.message })
+    )
+  }
 }
 
 const sendRequest = async ({
@@ -51,29 +76,16 @@ const sendRequest = async ({
     }
   }
 
-  if (method === 'POST' || method === 'PUT' || method === 'PATCH')
+  if (
+    (method === HttpMethod.POST ||
+      method === HttpMethod.PUT ||
+      method === HttpMethod.PATCH) &&
+    options.headers['Content-Type'] === 'application/json'
+  )
     options.body = JSON.stringify(body || {})
-
-  if (isHttps) options.agent = agent
-
-  try {
-    const { responseBody, ok, status } = await fetch(url, options).then(
-      parseResponse
-    )
-
-    LOG.debugJSON('response', responseBody)
-    LOG.debugJSON('valido', ok)
-    LOG.debugJSON('status', status)
-    LOG.debug('SERVICE: Ending sendRequest method')
-    return responseBody
-  } catch (err) {
-    LOG.error(`Error: ${JSON.stringify(err)}`)
-    if (err instanceof CommonException) throw err
-
-    throw new InternalServerException(
-      createMessageError('NMP-API-REDIS-500', { text: err.message })
-    )
-  }
+  else options.body = body
+  const responseBody = await ejecutaOperacionFetch(url, isHttps, options)
+  return responseBody
 }
 
 export const HttpClientService = {
