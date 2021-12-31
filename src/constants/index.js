@@ -36,9 +36,11 @@ export const { OAUTH_ID_DESTINO } = process.env
 export const { OAUTH_ID_CONSUMIDOR } = process.env
 // MQ Sender
 export const { AMQP_URI } = process.env
-export const { AMQP_MESSAGES_QUEUE } = process.env
+export const { AMQP_MESSAGES_QUEUE_IN } = process.env
+export const { AMQP_MESSAGES_QUEUE_OUT } = process.env
 export const { AMQP_MESSAGES_EXCHANGE } = process.env
 export const { AMQP_CERTIFICATE } = process.env
 export const { AMQP_HAS_CERTIFICATE } = process.env
 export const { IS_RABBIT_SERVICE } = process.env
 export const { TIEMPO_ESPERA_CAMBIO_ESTADO } = process.env
+export const { URL_OAG_CONSULTA_CREDITOS } = process.env

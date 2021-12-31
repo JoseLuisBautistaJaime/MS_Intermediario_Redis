@@ -1,11 +1,12 @@
 import LOG from '../commons/logger'
 import { HttpClientService } from './http-client.service'
 import {
-  AMQP_MESSAGES_QUEUE,
   OAUTH_AUTHORIZATION,
   OAUTH_ID_DESTINO,
   OAUTH_ID_CONSUMIDOR,
-  URL_OAUTH_VALIDATOR
+  URL_OAUTH_VALIDATOR,
+  URL_OAG_CONSULTA_CREDITOS,
+  AMQP_MESSAGES_QUEUE_OUT
 } from '../constants'
 
 const sender = require('./rabbit-queuesender.service')
@@ -38,18 +39,17 @@ const generarToken = async () => {
   return response
 }
 
-const encolaMensaje = async (idMensaje, cuerpoMensaje) => {
-  LOG.debug('SERVICE: Starting encolaPago method')
+const encolaMensaje = async cuerpoMensaje => {
+  LOG.debug('SERVICE: Starting encolaMensaje method')
   const queueMessage = {
-    queue: AMQP_MESSAGES_QUEUE,
+    queue: AMQP_MESSAGES_QUEUE_OUT,
     message: {
-      idMensaje,
       cuerpoMensaje
     }
   }
   LOG.debugJSON('queueMessage', queueMessage)
   await sender.publishMessage(queueMessage)
-  LOG.debug('SERVICE: Ending encolaPago method')
+  LOG.debug('SERVICE: Ending encolaMensaje method')
 }
 
 const procesaMensaje = async messageRecieved => {
@@ -60,10 +60,24 @@ const procesaMensaje = async messageRecieved => {
   LOG.trace('clienteId', clienteId)
   LOG.trace('pag', pag)
   LOG.traceJSON('tags', tags)
+  LOG.trace('URL_OAG_CONSULTA_CREDITOS:', URL_OAG_CONSULTA_CREDITOS)
   // eslint-disable-next-line camelcase
   const { access_token } = await generarToken()
   LOG.trace('access_token', access_token)
+  // en este punto se deberia llamar al entpoint del OAG
+  LOG.trace('en este punto se deberia llamar al entpoint del OAG')
 
+  const cuerpoMensajeRespuesta = {
+    sucursal: 15423,
+    descripcion: 'descripcion de la sucursal',
+    ramo: 'Alhajas',
+    subramo: 'Alhajas',
+    oferta: 'recordatorio con la especificación de oferta',
+    reempenio: 'tag de reempeño',
+    pag,
+    tags
+  }
+  await encolaMensaje(cuerpoMensajeRespuesta)
   LOG.debug('SERVICE: Starting procesaMensaje method')
 }
 

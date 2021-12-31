@@ -8,7 +8,8 @@ import {
   AMQP_CERTIFICATE,
   AMQP_HAS_CERTIFICATE,
   AMQP_MESSAGES_EXCHANGE,
-  AMQP_MESSAGES_QUEUE,
+  AMQP_MESSAGES_QUEUE_IN,
+  AMQP_MESSAGES_QUEUE_OUT,
   IS_RABBIT_SERVICE
 } from '../constants'
 
@@ -123,8 +124,8 @@ const getRabbitMessages = () => {
   const rabbitConfig = new RabbitConfiguration(
     AMQP_URI,
     AMQP_MESSAGES_EXCHANGE,
-    AMQP_MESSAGES_QUEUE,
-    AMQP_MESSAGES_QUEUE,
+    AMQP_MESSAGES_QUEUE_IN,
+    AMQP_MESSAGES_QUEUE_OUT,
     'direct',
     appEnv.services,
     rabbitOpts,
